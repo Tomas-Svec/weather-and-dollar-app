@@ -1,13 +1,22 @@
-import { Routes } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter, Routes } from '@angular/router';
+
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/tabs/dolar', // Redirige a la pestaña del dólar por defecto
     pathMatch: 'full',
   },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.routes').then((m) => m.tabsRoutes),
+  },
 ];
+
+
+
+// Exporta las rutas para usarlas en main.ts
+export const appConfig = {
+  providers: [provideRouter(routes)],
+};

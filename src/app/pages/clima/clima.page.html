@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Clima</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Ciudad</ion-label>
+    <ion-input [(ngModel)]="city" placeholder="Ejemplo: Madrid"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="getWeather(city)">Consultar Clima</ion-button>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="weatherData">
+    <h2>{{ weatherData.name }}</h2>
+    <p>Temperatura: {{ weatherData.main.temp }}°C</p>
+    <p>Condiciones: {{ weatherData.weather[0].description }}</p>
+    <p>Humedad: {{ weatherData.main.humidity }}%</p>
+  </div>
+</ion-content>

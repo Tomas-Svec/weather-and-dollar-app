@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Dólar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button expand="block" (click)="getDolar()">Consultar Dólar</ion-button>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="dolarData">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Dólar Oficial</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Compra:</strong> {{ dolarData.oficial.compra }}</p>
+        <p><strong>Venta:</strong> {{ dolarData.oficial.venta }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Dólar Blue</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Compra:</strong> {{ dolarData.blue.compra }}</p>
+        <p><strong>Venta:</strong> {{ dolarData.blue.venta }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
