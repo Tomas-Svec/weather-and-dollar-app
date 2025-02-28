@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Calculadora de Gastos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-toggle (ionChange)="toggleDarkMode($event.detail.checked)" checked="false">
+  Modo Oscuro
+</ion-toggle>
+
+<ion-content>
+  <!-- Calculadora -->
+  <div class="calculator-container">
+    <mat-form-field appearance="outline" class="display">
+      <!-- Se elimina "readonly" y se añade el evento (keydown) -->
+      <input
+        matInput
+        [(ngModel)]="currentInput"
+        placeholder="0"
+        (keydown)="onKeyDown($event)"
+      />
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button color="warn" (click)="clear()">C</button>
+      <button mat-raised-button color="accent" (click)="deleteLast()">←</button>
+      <button mat-raised-button color="primary" (click)="appendOperator('/')">÷</button>
+      <button mat-raised-button color="primary" (click)="appendOperator('*')">x</button>
+
+      <button mat-raised-button color="primary" (click)="appendNumber('7')">7</button>
+      <button mat-raised-button color="primary" (click)="appendNumber('8')">8</button>
+      <button mat-raised-button color="primary" (click)="appendNumber('9')">9</button>
+      <button mat-raised-button color="primary" (click)="appendOperator('-')">-</button>
+
+      <button mat-raised-button color="primary" (click)="appendNumber('4')">4</button>
+      <button mat-raised-button color="primary" (click)="appendNumber('5')">5</button>
+      <button mat-raised-button color="primary" (click)="appendNumber('6')">6</button>
+      <button mat-raised-button color="primary" (click)="appendOperator('+')">+</button>
+
+      <button mat-raised-button color="primary" (click)="appendNumber('1')">1</button>
+      <button mat-raised-button color="primary" (click)="appendNumber('2')">2</button>
+      <button mat-raised-button color="primary" (click)="appendNumber('3')">3</button>
+      <button mat-raised-button color="accent" (click)="calculate()" class="equals">=</button>
+
+      <button mat-raised-button color="primary" (click)="appendNumber('0')" class="zero">0</button>
+      <button mat-raised-button color="primary" (click)="appendNumber('.')">.</button>
+    </div>
+  </div>
+
+  <!-- Historial de operaciones -->
+  <div class="history-container">
+    <h3>Historial de Operaciones</h3>
+    <table mat-table [dataSource]="history" class="mat-elevation-z8">
+      <!-- Columna de operación -->
+      <ng-container matColumnDef="operation">
+        <th mat-header-cell *matHeaderCellDef>Operación</th>
+        <td mat-cell *matCellDef="let element">{{ element.operation }}</td>
+      </ng-container>
+
+      <!-- Columna de resultado -->
+      <ng-container matColumnDef="result">
+        <th mat-header-cell *matHeaderCellDef>Resultado</th>
+        <td mat-cell *matCellDef="let element">{{ element.result }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</ion-content>

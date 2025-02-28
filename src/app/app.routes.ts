@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+
 import { provideRouter, Routes } from '@angular/router';
 
 
@@ -11,6 +11,10 @@ export const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.routes').then((m) => m.tabsRoutes),
+  },
+  {
+    path: 'gastos',
+    loadComponent: () => import('./pages/gastos/gastos.page').then( m => m.GastosPage)
   },
 ];
 
